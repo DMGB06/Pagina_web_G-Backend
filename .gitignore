@@ -24,3 +24,10 @@ build/
 .vscode/
 .idea/
 .DS_Store
+.env
+.env
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

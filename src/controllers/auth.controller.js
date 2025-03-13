@@ -29,8 +29,8 @@ const register = async (req, res) => {
     const userSaved = await newUser.save(); // Guardar en la base de datos
 
     // Crear token con el ID del usuario
-    const token = await createAccesToken({ id: userSaved._id });
 
+    const token = await createAccesToken({ id: userSaved._id });
     // Enviar el token en las cookies
     res.cookie("token", token);
 
@@ -61,7 +61,6 @@ const login = async (req, res) => {
 
     // find a user token
     const token = await createAccesToken({ id: userFound._id });
-
     res.cookie("token", token);
     res.json({
       id: userFound._id,
@@ -76,11 +75,13 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.cookie("token", "", {
-    expires: new Date(0),
+  res.clearCookie("token", {
+    httpOnly: true
   });
-  return res.sendStatus(200);
+  
+  return res.status(200).json({ message: "Sesión cerrada exitosamente" });
 };
+
 
 const profile = (req, res) => {
   res.send("profile");

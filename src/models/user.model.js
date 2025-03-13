@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         default: "cliente" },
     membership:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "memberships",
+        ref: "Membership",
         default: null
     },
 });

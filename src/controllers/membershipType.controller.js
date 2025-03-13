@@ -15,7 +15,7 @@ const createMembershipType = async (req, res) => {
     const newMembershipType = new MembershipType({ name, price, duration});
     const savedMembershipType = await newMembershipType.save();
 
-    res.json({
+    res.status(200).json({  
       id: savedMembershipType._id,
       name: savedMembershipType.name,
       price: savedMembershipType.price,
@@ -33,7 +33,7 @@ const createMembershipType = async (req, res) => {
 const getMembershipsType = async (req, res) => {
   try {
     const memberships = await MembershipType.find();
-    res.json(memberships);
+    res.status(200).json(memberships);
   } catch (error) {
     console.error("Error fetching memberships:", error);
     res.status(500).json({ message: "Server error" });
@@ -57,7 +57,7 @@ const getMembershipType = async (req, res) => {
     if (!membershipType)
       return res.status(400).json({ message: "Membership type not found" });
 
-    res.json(membershipType);
+    res.status(200).json(membershipType);
 
   } catch (error) {
     console.error("Error fetching membership type:", error);
@@ -80,7 +80,7 @@ const updateMembershipType = async (req, res) => {
       { new: true }
     );
 
-    res.json({
+    res.status(200).json({
       message: "Membership type updated successfully",
       updatedMembershipType,
     });
@@ -100,7 +100,7 @@ const deleteMembershipType = async (req, res) => {
 
     await MembershipType.findByIdAndDelete(req.params.id);
 
-    res.json({ message: "Membership type deleted successfully" });
+    res.status(200).json({ message: "Membership type deleted successfully" });
 
   } catch (error) {
     console.error("Error deleting membership type:", error);
