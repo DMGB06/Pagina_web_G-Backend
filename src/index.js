@@ -48,7 +48,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
+  .then(() => console.log("Conectado a MongoDB Atlas"))
   .catch((error) => {
     console.error(" Error de conexión a MongoDB:", error);
     process.exit(1);
