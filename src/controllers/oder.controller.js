@@ -132,7 +132,7 @@ const getOrderById = async (req, res) => {
 
 const deleteOrder = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
     const order = await Order.findById(req.params.id);
 
     if (!order) return res.status(404).json({ message: "Orden no encontrada" });
@@ -153,7 +153,7 @@ const deleteOrder = async (req, res) => {
       await product.save();
     }
 
-    await Order.findByIdAndDelete(order._id);
+    await Order.findByIdAndDelete(order.id);
 
     res.json({ message: "Orden eliminada correctamente" });
   } catch (error) {
