@@ -74,7 +74,7 @@ const getUserMembership = async (req, res) => {
 // Eliminar una membresía (solo Admins)
 const deleteMembership = async (req, res) => {
   try {
-    // 🔍 Buscar la membresía antes de eliminarla
+    //Buscar la membresía antes de eliminarla
     const membership = await Membership.findById(req.params.id);
     if (!membership) return res.status(404).json({ message: "Membresía no encontrada" });
 
@@ -87,7 +87,7 @@ const deleteMembership = async (req, res) => {
     res.status(200).json({ message: "Membresía eliminada con éxito y actualizada en el usuario" });
 
   } catch (error) {
-    console.error("❌ ERROR AL ELIMINAR MEMBRESÍA:", error);
+    console.error("ERROR AL ELIMINAR MEMBRESÍA:", error);
     res.status(500).json({ message: "Error al eliminar la membresía", error });
   }
 };
