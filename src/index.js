@@ -56,4 +56,4 @@ mongoose
   .catch((error) => console.error("Error de conexión:", error));
 
 // --   Iniciar el Servidor --
-app.listen(port, () => console.log(`🔥 Servidor corriendo en http://localhost:${port}`));
+app.listen(port, () => console.log(`Servidor corriendo en http://localhost:${port}`));
