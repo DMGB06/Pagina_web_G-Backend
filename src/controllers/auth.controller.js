@@ -32,8 +32,12 @@ const register = async (req, res) => {
 
     const token = await createAccesToken({ id: userSaved._id });
     // Enviar el token en las cookies
-    res.cookie("token", token);
-
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Solo usa secure en producción
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // None para cross-origin (Vercel + Render)
+    });
+    
     // Enviar datos al frontend
     res.json({
       id: userSaved._id,
@@ -61,7 +65,12 @@ const login = async (req, res) => {
 
     // find a user token
     const token = await createAccesToken({ id: userFound._id });
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Solo usa secure en producción
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // None para cross-origin (Vercel + Render)
+    });
+    
     res.json({
       id: userFound._id,
       username: userFound.username,
@@ -76,8 +85,11 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   res.clearCookie("token", {
-    httpOnly: true
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
   });
+  
   
   return res.status(200).json({ message: "Sesión cerrada exitosamente" });
 };
