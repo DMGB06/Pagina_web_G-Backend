@@ -22,7 +22,7 @@ router.get("/products", getProducts);
 router.get("/products/:id", authMiddleware, getProduct);
 
 // Actualizar un producto (solo admin)
-router.put("/products/:id", authMiddleware, adminMiddleware, updateProduct);
+router.put("/products/:id", authMiddleware, adminMiddleware,validatorSchema(updateProductSchema), updateProduct);
 
 // eliminar un producto (solo admin)
 router.delete("/products/:id", authMiddleware, adminMiddleware, deleteProduct);

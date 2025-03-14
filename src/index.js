@@ -52,8 +52,8 @@ app.use("/api", orderRoutes);
 /*--   Conexión a la Base de Datos --*/
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
-  .catch((error) => console.error("❌ Error de conexión:", error));
+  .then(() => console.log("Conectado a MongoDB Atlas"))
+  .catch((error) => console.error("Error de conexión:", error));
 
 // --   Iniciar el Servidor --
 app.listen(port, () => console.log(`🔥 Servidor corriendo en http://localhost:${port}`));

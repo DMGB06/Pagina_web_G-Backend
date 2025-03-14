@@ -104,7 +104,13 @@ const updateProduct = async (req, res) => {
     
     const { id } = req.params;
     const { name, price, stock, category, description } = req.body;
+    const existProduct = await Product.findOne({name})
 
+    if(existProduct){
+      return  res.status(400).json({message: "Producto ya existente"})
+    }
+    
+    
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: "ID de producto inválido" });
     }

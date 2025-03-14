@@ -1,18 +1,18 @@
 const { v2: cloudinary } = require("cloudinary");
-require("dotenv").config(); // ✅ Cargar variables de entorno
+require("dotenv").config();
 
-// 🔧 Configurar Cloudinary
+// Configurar Cloudinary
 cloudinary.config({
-  cloud_name: "dhkwkavdd",
-  api_key: "672943187974484",
-  api_secret: "WcLOL5t9xMi0MbM6Fns5tSaLbGc",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 console.log("CLOUDINARY_CLOUD_NAME:", process.env.CLOUDINARY_CLOUD_NAME);
 console.log("CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY);
 console.log(
   "CLOUDINARY_API_SECRET:",
-  process.env.CLOUDINARY_API_SECRET ? "LOADED" : "NOT LOADED"
+  process.env.CLOUDINARY_API_SECRET
 );
 
 /**
@@ -36,10 +36,10 @@ const uploadImageToCloudinary = async (filePath) => {
       unique_filename: false,
     });
 
-    console.log("✅ Imagen subida con éxito:", uploadResult.secure_url);
+    console.log("Imagen subida con éxito:", uploadResult.secure_url);
     return uploadResult.secure_url;
   } catch (error) {
-    console.error("❌ Error subiendo la imagen a Cloudinary:", error.message);
+    console.error("Error subiendo la imagen a Cloudinary:", error.message);
     return null;
   }
 };
@@ -57,11 +57,11 @@ const deleteImageFromCloudinary = async (imageUrl, folder = "products") => {
 
     await cloudinary.uploader.destroy(`${folder}/${publicId}`);
   } catch (error) {
-    console.error("❌ Error al eliminar imagen:", error.message);
+    console.error("Error al eliminar imagen:", error.message);
     throw error;
   }
 };
 
 
-// ✅ Exportar la función
+// Exportar la función
 module.exports = { uploadImageToCloudinary, deleteImageFromCloudinary };
